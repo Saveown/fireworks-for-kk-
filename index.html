@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>给KK的惊喜</title>
+<style>
+  /* 基础页面样式 */
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000; /* 黑色背景以突出烟花效果 */
+  }
 
+  /* 烟花容器样式 */
+  #fireworks-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  /* 文字样式，默认隐藏 */
+  #message {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 5vw; /* 使用视窗宽度单位，以适应不同屏幕尺寸 */
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    z-index: 2;
+    animation: fadeIn 2s; /* 添加淡入动画效果 */
+  }
+
+  /* 淡入动画 */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div id="fireworks-container"></div>
+
+<h1 id="message">KK超帅！</h1>
+
+<script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.2/dist/index.umd.js"></script>
+
+<script>
+  // 获取烟花容器
+  const container = document.getElementById('fireworks-container');
+  // 初始化烟花
+  const fireworks = new Fireworks.default(container, {
+    rocketsPoint: {
+      min: 50,
+      max: 50
+    },
+    hue: {
+      min: 0,
+      max: 360
+    },
+    delay: {
+      min: 0.015,
+      max: 0.03
+    },
+    speed: 2,
+    acceleration: 1.05,
+    friction: 0.95,
+    gravity: 1.5,
+    particles: 90,
+    traceSpeed: 3,
+    explosion: 5,
+    intensity: 30,
+    flickering: 50,
+    lineStyle: 'round'
+  });
+
+  // 启动烟花
+  fireworks.start();
+
+  // 设置一个5秒（5000毫秒）的定时器
+  setTimeout(() => {
+    // 5秒后执行这里的代码
+    
+    // 停止并清除烟花
+    fireworks.stop();
+    fireworks.clear();
+
+    // 显示文字
+    const message = document.getElementById('message');
+    message.style.display = 'block';
+
+  }, 5000);
+</script>
+
+</body>
+</html>
